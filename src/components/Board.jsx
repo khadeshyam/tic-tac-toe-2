@@ -6,7 +6,22 @@ import Square from "../components/Square";
 function Board() {
     const [xIsNext, setXIsNext] = useState(true);
     const [squares, setSquares] = useState(Array(9).fill(null));
+    console.log(squares);
+
+    function computerGuess(nextSquares){
+      let random = 0;
+      while(1){
+         random = Math.floor(Math.random()*squares.length);
+         console.log(random);
+         if(squares[random] !== "X" && squares[random] ===null ){
+          nextSquares[random] = 'O';
+          break;
+         }
+      }
+     
+    }
   
+    console.log(squares);
     function handleClick(i) {
       if (squares[i] || calculateWinner(squares)) {
         return;
@@ -16,12 +31,7 @@ function Board() {
       if (xIsNext) {
         nextSquares[i] = 'X';
       } else {
-        
-        // let random = 0;
-        // while(squares[random] === 'X' || squares[random] === null ){
-        //     random = Math.floor(Math.random()*squares.length);
-        // }
-        nextSquares[i] = 'O';
+          computerGuess(nextSquares);
       }
       setSquares(nextSquares);
       setXIsNext(!xIsNext);
